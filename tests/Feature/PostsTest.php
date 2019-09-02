@@ -4,12 +4,22 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
+use App\Post;
 
 class PostsTest extends TestCase
 {
-    use RefreshDatabase;
+    public function setUp(): void
+    {
+        parent::setUp();
+        User::executeSchema();
+    }
 
+    public function tearDown(): void
+    {
+        User::truncate();
+        Post::truncate();
+    }
 
     /** @test **/
     public function a_guest_can_not_create_a_post () {

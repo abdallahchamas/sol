@@ -4,6 +4,12 @@
 <div class="container removeSidePadding">
     <h1 class="title">Posts</h1>
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
     <ul>
         @foreach($posts as $post)
             <li>

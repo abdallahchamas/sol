@@ -13,7 +13,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Post' => 'App\Policies\PostPolicy',
     ];
 
     /**
@@ -26,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         $gate->before(function ($user) {
-            return $user->id == 1;
+            return $user->isAdmin();
         });
     }
 }

@@ -4,11 +4,22 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
+use App\Post;
 
 class UsersTest extends TestCase
 {
-    use RefreshDatabase;
+    public function setUp(): void
+    {
+        parent::setUp();
+        User::executeSchema();
+    }
+
+    public function tearDown(): void
+    {
+        User::truncate();
+        Post::truncate();
+    }
 
     /** @test **/
     public function main_page_is_working ()
@@ -30,6 +41,7 @@ class UsersTest extends TestCase
     /** @test **/
     public function only_one_user_can_register ()
     {
+        $this->withoutExceptionHandling();
         $attributes = [
             'name' => 'TestUser1',
             'email' => 'TestUser1@example.org',

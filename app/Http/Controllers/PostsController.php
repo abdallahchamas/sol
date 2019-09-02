@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PostsController extends Controller
 {
@@ -11,7 +12,8 @@ class PostsController extends Controller
 
     public function index ()
     {
-        $this->authorize('update');
+        $this->authRequired();
+
         $posts = auth()->user()->posts;
 
         return view('posts.index', compact('posts'));
@@ -26,24 +28,25 @@ class PostsController extends Controller
 
     public function create ()
     {
-        $this->authorize('update');
+        $this->authRequired();
 
         return view('posts.create');
     }
 
     public function store ()
     {
-        $this->authorize('update');
+        $this->authRequired();
 
         $attributes = $this->validatePost();
+
         $post = Post::create($attributes + ['owner_id' => auth()->id()]);
 
-        return redirect('/posts');
+        return redirect('/posts')->with('success', 'Post created');
     }
 
     public function edit(Post $post)
     {
-        $this->authorize('update');
+        $this->authRequired();
 
         return view("posts.edit", compact('post'));
     }
@@ -54,16 +57,16 @@ class PostsController extends Controller
 
         $post->update($this->validatePost());
 
-        return redirect("/posts");
+        return redirect("/posts")->with('success', 'Post updated');
     }
 
     public function destroy(Post $post)
     {
-        $this->authorize('update');
+        $this->authRequired();
 
         $post->delete();
 
-        return redirect("/posts");
+        return redirect("/posts")->with('success', 'Post deleted');
     }
 
     protected function validatePost () {
@@ -79,5 +82,9 @@ class PostsController extends Controller
         });
 
         return view('posts.displayAll', compact('posts'));
+    }
+
+    private function authRequired () {
+        abort_if(is_null(auth()->user()) || ! auth()->user()->isAdmin(), 403);
     }
 }

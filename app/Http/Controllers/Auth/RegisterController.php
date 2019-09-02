@@ -37,8 +37,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        abort_if(User::all()->count() > 0, 403);
-
         $this->middleware('guest');
     }
 
@@ -50,6 +48,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        abort_if(User::all()->count() > 0, 403);
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

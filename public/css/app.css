@@ -10678,6 +10678,11 @@ body {
   background-color: aliceblue;
 }
 
+.alert-success p {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
 #mainPage .post {
   margin-top: 40px;
 }

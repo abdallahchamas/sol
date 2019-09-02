@@ -14,6 +14,13 @@
 Route::get('/', 'PostsController@displayAll');
 
 Route::resource('posts', 'PostsController');
+// Route::get('posts', 'PostsController');
+// Route::get('posts/create', 'PostsController');
+// Route::get('posts/show', 'PostsController');
+// Route::get('posts/index', 'PostsController');
+// Route::get('posts/update', 'PostsController');
+// Route::get('posts/edit', 'PostsController');
+// Route::delete('posts/delete', 'PostsController');
 
 Auth::routes();
 
