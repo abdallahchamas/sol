@@ -24,5 +24,17 @@ Update the .env and .env_testing files with:
 ## Tests
 Unit and feature tests are in the tests directory.
 
+## TODO
+- Implement caching
+- Implement users that can comment on posts
+- Implement WYSIWYG or Markdown
+- Allow uploading photos
+- Allow uploading files
+- Add social media sharing links
+- Lazy loading of posts on the main page
+- Add a side menu containing the post titles for easier browsing
+- Create SEO-friendly blog post URLs
+- Use caching to save the admin ID and use it in the User:isAdmin method
+
 ## Contact
 If you like the blog or if you're just feeling social, feel free to [email](mailto:abdallah.chamas@gmail.com) me or connect with me on [LinkedIn](https://www.linkedin.com/in/achamas).
