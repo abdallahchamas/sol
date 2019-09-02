@@ -25,6 +25,7 @@ Update the .env and .env_testing files with:
 Unit and feature tests are in the tests directory.
 
 ## TODO
+- Use policy authentication instead of relying on a private method in the PostsController class
 - Implement caching
 - Implement users that can comment on posts
 - Implement WYSIWYG or Markdown
